@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TsSelect2 Test</title>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+
+    <script src="./dist/ts-select2.min.js"></script>
+</head>
+<body>
+<select data-placeholder="Select something" multiple="multiple" class="form-control select-access-multiple-enable">
+    <option value="AK">Alaska</option>
+    <option value="CA">California</option>
+    <option value="AZ" selected>Arizona</option>
+    <option value="CO">Colorado</option>
+    <option value="ID">Idaho</option>
+    <option value="WY" selected>Wyoming</option>
+    <option value="CT">Connecticut</option>
+</select>
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const select = document.querySelector('select');
+        this.select2 = new TsSelect2(select, {
+            minimumResultsForSearch: Infinity,
+            width                  : `250px`
+        });
+    });
+</script>
+</html>
