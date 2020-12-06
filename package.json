@@ -1,6 +1,6 @@
 {
     "name": "ts-select2",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "description": "TsSelect2 is a version of Select2 written in typescript without any dependencies. It supports searching, remote data sets, and infinite scrolling of results.",
     "main": "dist/index.js",
     "browser": "dist/ts-select2.min.js",
@@ -11,7 +11,7 @@
         "test": "test"
     },
     "scripts": {
-        "build": "tsc",
+        "build": "tsc --declaration",
         "ci": "(npm run build && npm run rollup) & npm t & wait",
         "prepublishOnly": "npm run ci && npm run rollup",
         "test": "jest",

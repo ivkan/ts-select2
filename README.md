@@ -1,5 +1,6 @@
 ## Description
 TsSelect2 is a version of <a href="https://github.com/select2/select2" target="_blank">Select2</a> written in typescript without any dependencies. It supports searching, remote data sets, and infinite scrolling of results.
+Use the TsSelect2 library for development only, not production for now.
 
 ## Installation - NPM
 
