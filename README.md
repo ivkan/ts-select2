@@ -38,6 +38,8 @@ Add the following stylesheets from <a href="https://github.com/select2/select2" 
 </select>
 ```
 
+## [Example](https://ivkan.github.io/ts-select2/example.html)
+
 To initialise the select, call TsSelect2 on the element:
 ```javascript
 const select2 = new TsSelect2(select, {  minimumResultsForSearch: Infinity,  width: `250px` });
