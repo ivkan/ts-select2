@@ -477,6 +477,24 @@ export class TsSelect2 extends Observable implements ISelect2
         }
     }
 
+    select2(name: string): void
+    {
+        switch (name)
+        {
+            case 'open':
+                this.open();
+                break;
+
+            case 'close':
+                this.close();
+                break;
+
+            case 'destroy':
+                this.destroy();
+                break;
+        }
+    }
+
     /**
      * Override the trigger method to automatically trigger pre-events when
      * there are events that can be prevented.
