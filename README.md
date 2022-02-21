@@ -42,5 +42,55 @@ Add the following stylesheets from <a href="https://github.com/select2/select2" 
 
 To initialise the select, call TsSelect2 on the element:
 ```javascript
-const select2 = new TsSelect2(select, {  minimumResultsForSearch: Infinity,  width: `250px` });
+const select2 = new TsSelect2(select, {minimumResultsForSearch: Infinity, width: `250px`});
+
+/**
+ * Opens the select
+ */
+select2.open();
+
+/**
+ * Closes the select.
+ */
+select2.close();
+
+/**
+ * Toggles the dropdown
+ */
+select2.toggleDropdown();
+
+/**
+ * Gets if the dropdown is enabled
+ */
+select2.isEnabled();
+
+/**
+ * Gets if the dropdown is disabled
+ */
+select2.isDisabled();
+
+/**
+ * Gets if the dropdown is opened
+ */
+select2.isOpen();
+
+/**
+ * Gets if the dropdown is focused
+ */
+select2.focus();
+
+/**
+ * Returns an array of data
+ */
+select2.data();
+
+/**
+ * Destroy the select.
+ */
+select2.destroy();
+
+/**
+ * Use one of the arguments: 'open', 'close', 'destroy'
+ */
+select2.select2('open');
 ```
