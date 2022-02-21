@@ -13,7 +13,7 @@ npm i ts-select2
 
 ```html
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://unpkg.com/ts-select2@0.1.0/dist/ts-select2.min.js"></script>
+<script src="https://unpkg.com/ts-select2@0.2.1/dist/ts-select2.min.js"></script>
 ```
 
 ## Usage
