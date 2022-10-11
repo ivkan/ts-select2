@@ -139,7 +139,7 @@ export class Results extends Observable
             // If there are selected options, highlight the first
             eventTrigger(selected[0] as HTMLElement, 'mouseenter');
         }
-        else
+        else if (options[0])
         {
             // If there are no selected options, highlight the first option
             // in the dropdown
