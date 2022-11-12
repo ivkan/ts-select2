@@ -3,27 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <title>TsSelect2 Test</title>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-
-    <script src="https://unpkg.com/ts-select2@0.1.0/dist/ts-select2.min.js"></script>
+    <link href="./example.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/css/bootstrap.min.css"
+          integrity="sha512-CpIKUSyh9QX2+zSdfGP+eWLx23C8Dj9/XmHjZY2uDtfkdLGo0uY12jgcnkX9vXOgYajEKb/jiw67EYm+kBf+6g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script src="./dist/ts-select2.min.js"></script>
 </head>
 <body>
-<select data-placeholder="Select something" multiple="multiple" class="form-control select-access-multiple-enable">
-    <option value="AK">Alaska</option>
-    <option value="CA">California</option>
-    <option value="AZ" selected>Arizona</option>
-    <option value="CO">Colorado</option>
-    <option value="ID">Idaho</option>
-    <option value="WY" selected>Wyoming</option>
-    <option value="CT">Connecticut</option>
-</select>
+
+<div class="page-content">
+    <div class="content-wrapper">
+        <div class="content-inner">
+            <div class="card-body">
+                <div class="card">
+                    <div class="content">
+                        <div class="mb-4">
+                            <div class="mb-3 row">
+                                <label class="col-form-label col-lg-3">Basic select</label>
+                                <div class="col-lg-9">
+                                    <select class="form-control select-simple" data-minimum-results-for-search="Infinity">
+                                        <!--<optgroup label="Mountain Time Zone">
+                                            <option value="AZ">Arizona</option>
+                                            <option value="CO">Colorado</option>
+                                            <option value="ID">Idaho</option>
+                                            <option value="WY">Wyoming</option>
+                                        </optgroup>
+                                        <optgroup label="Central Time Zone">
+                                            <option value="AL">Alabama</option>
+                                            <option value="AR">Arkansas</option>
+                                            <option value="KS">Kansas</option>
+                                            <option value="KY">Kentucky</option>
+                                        </optgroup>-->
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label class="col-form-label col-lg-3">Multiple select</label>
+                                <div class="col-lg-9">
+                                    <select data-placeholder="Select something" multiple="multiple"
+                                            class="form-control select-multiple">
+                                        <option value="AK">Alaska</option>
+                                        <option value="CA">California</option>
+                                        <option value="AZ" selected>Arizona</option>
+                                        <option value="CO">Colorado</option>
+                                        <option value="ID">Idaho</option>
+                                        <option value="WY" selected>Wyoming</option>
+                                        <option value="CT">Connecticut</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label class="col-form-label col-lg-3">Loading remote data</label>
+                                <div class="col-lg-9">
+                                    <select class="form-control select-remote-data">
+                                        <option value="318991746" selected>ivkan/ts-select2</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const select = document.querySelector('select');
-        this.select2 = new TsSelect2(select, {
+    document.addEventListener("DOMContentLoaded", function () {
+
+        // Data
+        const array_data = [
+            {id: 0, text: 'enhancement'},
+            {id: 1, text: 'bug'},
+            {id: 2, text: 'duplicate'},
+            {id: 3, text: 'invalid'},
+            {id: 4, text: 'wontfix'}
+        ];
+
+        // Default initialization
+        new TsSelect2(document.querySelector('select.select-simple'), {
+            // minimumResultsForSearch: Infinity,
+            // width: `250px`
+            placeholder: 'Click to load data',
             minimumResultsForSearch: Infinity,
-            width                  : `250px`
+            data: array_data
+        });
+
+        // Default initialization
+        new TsSelect2(document.querySelector('select.select-multiple'), {
+            minimumResultsForSearch: Infinity,
+            width: `250px`
+        });
+
+        //
+        // Loading remote data
+        //
+
+        // Format displayed data
+        function formatRepo(repo) {
+            if (repo.loading) return repo.text;
+
+            let markup = '<div class="select2-result-repository clearfix">' +
+                '<div class="select2-result-repository__avatar"><img src="' + repo.owner.avatar_url + '" /></div>' +
+                '<div class="select2-result-repository__meta">' +
+                '<div class="select2-result-repository__title">' + repo.full_name + '</div>';
+
+            if (repo.description) {
+                markup += '<div class="select2-result-repository__description">' + repo.description + '</div>';
+            }
+
+            markup += '<div class="select2-result-repository__statistics">' +
+                '<div class="select2-result-repository__forks">' + repo.forks_count + ' Forks</div>' +
+                '<div class="select2-result-repository__stargazers">' + repo.stargazers_count + ' Stars</div>' +
+                '<div class="select2-result-repository__watchers">' + repo.watchers_count + ' Watchers</div>' +
+                '</div>' +
+                '</div></div>';
+
+            return markup;
+        }
+
+        // Format selection
+        function formatRepoSelection(repo) {
+            return repo.full_name || repo.text;
+        }
+
+        // Initialize
+        new TsSelect2(document.querySelector('select.select-remote-data'), {
+            ajax: {
+                url: 'https://api.github.com/search/repositories',
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term, // search term
+                        page: params.page
+                    };
+                },
+                processResults: function (data, params) {
+
+                    // parse the results into the format expected by Select2
+                    // since we are using custom formatting functions we do not need to
+                    // alter the remote JSON data, except to indicate that infinite
+                    // scrolling can be used
+                    params.page = params.page || 1;
+
+                    return {
+                        results: data.items,
+                        pagination: {
+                            more: (params.page * 30) < data.total_count
+                        }
+                    };
+                },
+                cache: true
+            },
+            escapeMarkup: function (markup) {
+                return markup;
+            }, // let our custom formatter work
+            minimumInputLength: 1,
+            templateResult: formatRepo, // omitted for brevity, see the source of this page
+            templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
         });
     });
 </script>

@@ -1,4 +1,4 @@
-export function eventTrigger(el: HTMLElement|Element, eventName: string, detail?: any): CustomEvent
+export function eventTrigger(el: HTMLElement|Element|Document, eventName: string, detail?: any): CustomEvent
 {
     let event: CustomEvent;
     if (window['CustomEvent'] && typeof window['CustomEvent'] === 'function')

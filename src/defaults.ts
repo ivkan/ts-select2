@@ -32,6 +32,7 @@ import { extend } from './utils/extend';
 import { isNil } from './utils/is-nil';
 import { escapeHTML } from './utils/escape-html';
 import { camelCase } from './utils/camel-case';
+import { AjaxAdapter } from './adapters/ajax';
 
 export class Defaults
 {
@@ -48,7 +49,11 @@ export class Defaults
 
         if (isNil(options.dataAdapter))
         {
-            if (!isNil(options.data))
+            if (!isNil(options.ajax))
+            {
+                options.dataAdapter = AjaxAdapter;
+            }
+            else if (!isNil(options.data))
             {
                 options.dataAdapter = ArrayAdapter;
             }
@@ -86,6 +91,11 @@ export class Defaults
         if (isNil(options.resultsAdapter))
         {
             options.resultsAdapter = Results;
+
+            if (!isNil(options.ajax))
+            {
+                options.resultsAdapter = InfiniteScroll(options.resultsAdapter);
+            }
 
             if (!isNil(options.infiniteScroll))
             {

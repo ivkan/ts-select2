@@ -115,6 +115,24 @@ export interface ITranslation {
     removeItem?: () => string;
 }
 
+export interface IAjaxOptions
+{
+    url        : string,
+    method     : string,
+    data       : boolean,
+    async      : boolean,
+    cache      : boolean,
+    user       : string,
+    password   : string,
+    headers    : any,
+    xhrFields  : any,
+    statusCode : any,
+    processData: boolean,
+    dataType   : string,
+    contentType: string,
+    timeout    : number,
+}
+
 export interface SelectOptions<Result = DataFormat|GroupedDataFormat>
 {
     allowClear?: boolean;
@@ -123,6 +141,7 @@ export interface SelectOptions<Result = DataFormat|GroupedDataFormat>
     containerCss?: any;
     containerCssClass?: string;
     data?: DataFormat[]|GroupedDataFormat[];
+    ajax?: IAjaxOptions;
     dataAdapter?: any;
     debug?: boolean;
     dir?: 'ltr'|'rtl';
