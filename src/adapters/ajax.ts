@@ -1,6 +1,5 @@
 import { ArrayAdapter } from './array';
 import { extend } from '../utils';
-import { ajax } from '../utils/ajax';
 import request from '../utils/request';
 import { isNil } from '../utils/is-nil';
 
