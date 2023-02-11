@@ -83,7 +83,7 @@
             {id: 4, text: 'wontfix'}
         ];
 
-        // Default initialization
+        // Basic select
         new TsSelect2(document.querySelector('select.select-simple'), {
             // minimumResultsForSearch: Infinity,
             // width: `250px`
@@ -92,7 +92,7 @@
             data: array_data
         });
 
-        // Default initialization
+        // Multiple select
         new TsSelect2(document.querySelector('select.select-multiple'), {
             minimumResultsForSearch: Infinity,
             width: `250px`
@@ -130,7 +130,7 @@
             return repo.full_name || repo.text;
         }
 
-        // Initialize
+        // Remote data select
         new TsSelect2(document.querySelector('select.select-remote-data'), {
             ajax: {
                 url: 'https://api.github.com/search/repositories',
