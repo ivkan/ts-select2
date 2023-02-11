@@ -54,9 +54,12 @@ export const Placeholder = (target: ISelection) =>
 
             const placeholderContainer = this.createPlaceholder(this.placeholder);
 
-            this.selection
-                .querySelector('.select2-selection__rendered')
-                .append(placeholderContainer);
+            if (placeholderContainer)
+            {
+                this.selection
+                    .querySelector('.select2-selection__rendered')
+                    .append(placeholderContainer);
+            }
         }
     }
 };
